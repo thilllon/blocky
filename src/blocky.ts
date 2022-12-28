@@ -40,11 +40,11 @@ const hslToRgb = (
   return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 };
 
-const createRandSeed = (seed: string) => {
-  // The random number is a js implementation of the Xorshift PRNG
-  // Xorshift: [x, y, z, w] 32 bit values
-  const randseed: RandSeed = [0, 0, 0, 0];
+// The random number is a js implementation of the Xorshift PRNG
+// Xorshift: [x, y, z, w] 32 bit values
+const randseed: RandSeed = [0, 0, 0, 0];
 
+const createRandSeed = (seed: string) => {
   for (let i = 0; i < seed.length; i++) {
     randseed[i % 4] =
       (randseed[i % 4] << 5) - randseed[i % 4] + seed.charCodeAt(i);
@@ -53,7 +53,7 @@ const createRandSeed = (seed: string) => {
   return randseed;
 };
 
-const createRandom = (randseed: RandSeed) => {
+const rand = () => {
   // based on Java's String.hashCode(), expanded to 4 32bit values
   const t = randseed[0] ^ (randseed[0] << 11);
 
@@ -65,23 +65,21 @@ const createRandom = (randseed: RandSeed) => {
   return (randseed[3] >>> 0) / ((1 << 31) >>> 0);
 };
 
-const createHSL = (randseed: RandSeed) => {
-  const random = createRandom(randseed);
-
+const createHSL = () => {
   // hue is the whole color spectrum
-  const h = random;
+  const h = rand();
 
   // saturation goes from 0.4 to 1, it avoids greyish colors
-  const s = random * 0.6 + 0.4;
+  const s = rand() * 0.6 + 0.4;
 
   // lightness can be anything from 0 to 1, but probabilities are a bell curve around 0.5
-  const l = (random + random + random + random) / 4;
+  const l = (rand() + rand() + rand() + rand()) / 4;
 
   return [h, s, l];
 };
 
 // FIXME: only support square icons for now
-const createImageData = (randseed: RandSeed, width: number, height: number) => {
+const createImageData = (width: number, height: number) => {
   const dataWidth = Math.ceil(width / 2);
   const mirrorWidth = width - dataWidth;
 
@@ -92,7 +90,7 @@ const createImageData = (randseed: RandSeed, width: number, height: number) => {
       for (let x = 0; x < dataWidth; x++) {
         // this makes foreground and background color to have a 43% (1/2.3) probability
         // spot color has 13% chance
-        row[x] = Math.floor(createRandom(randseed) * 2.3);
+        row[x] = Math.floor(rand() * 2.3);
       }
       const reversed = row.slice(0, mirrorWidth).reverse();
       return row.concat(reversed);
@@ -117,15 +115,15 @@ export const createBuffer = (optsParam: Options) => {
   options.seed =
     optsParam.seed ?? Math.floor(Math.random() * 10 ** 16).toString(16);
 
-  const randseed = createRandSeed(options.seed);
+  createRandSeed(options.seed);
 
-  const [h, s, l] = createHSL(randseed);
+  const [h, s, l] = createHSL();
   const rgb = hslToRgb(h, s, l);
   options.fgColor = optsParam.fgColor ?? rgb;
   options.bgColor = optsParam.bgColor ?? options.bgColor;
   options.spotColor = optsParam.spotColor ?? rgb;
 
-  const imageData = createImageData(randseed, options.size, options.size);
+  const imageData = createImageData(options.size, options.size);
 
   const imageWidth = options.size * options.scale;
 

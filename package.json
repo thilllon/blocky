@@ -32,7 +32,7 @@
     "test": "jest",
     "lint": "eslint --fix .",
     "format": "prettier -w -l .",
-    "preprelease": "pnpm format && pnpm lint && pnpm test && pnpm build",
+    "prerelease": "pnpm format && pnpm lint && pnpm test && pnpm build",
     "release": "release-it"
   },
   "dependencies": {

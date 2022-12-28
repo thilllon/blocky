@@ -6,3 +6,5 @@ dist
 
 example/.blocky
 example/.github
+
+.DS_Store

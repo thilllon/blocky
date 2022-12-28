@@ -2,7 +2,7 @@
   "name": "blocky",
   "version": "0.0.12",
   "main": "./dist/index.js",
-  "description": "A CLI tool to utilize Octokit",
+  "description": "Blocky",
   "repository": "git@github.com:thilllon/blocky.git",
   "bugs": {
     "url": "https://github.com/thilllon/blocky/issues"

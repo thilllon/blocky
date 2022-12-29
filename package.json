@@ -1,12 +1,9 @@
 {
-  "name": "blocky",
+  "name": "@thilllon/blockies",
   "version": "0.0.12",
   "main": "./dist/index.js",
   "description": "Blocky",
   "repository": "git@github.com:thilllon/blocky.git",
-  "bugs": {
-    "url": "https://github.com/thilllon/blocky/issues"
-  },
   "packageManager": "pnpm@7.18.1",
   "contributors": [
     "thilllon <thilllon970@gmail.com>"
@@ -15,6 +12,9 @@
     "name": "thilllon",
     "email": "thilllon970@gmail.com",
     "url": "https://github.com/thilllon"
+  },
+  "bugs": {
+    "url": "https://github.com/thilllon/blocky/issues"
   },
   "license": "MIT",
   "types": "./dist/index.d.ts",

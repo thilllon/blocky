@@ -1,4 +1,4 @@
-# blocky
+# @thilllon/blockies
 
 - `blockies`, `ethereum-blockies` (동일): js로 작성. ethereum mist library에 사용됨.
 

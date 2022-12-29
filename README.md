@@ -22,3 +22,4 @@
 - 참고
 - https://github.com/download13/blockies/blob/master/src/blockies.mjs
   <!-- return 'data:image/png;base64,' + buf.toString('base64') -->
+- pngjs 를 대체할수있을까. pnglib까지 쓰지않고?https://github.com/GeorgeChan/pnglib/blob/master/lib/pnglib.js

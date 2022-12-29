@@ -5,10 +5,9 @@ import { v4 as uuid } from 'uuid';
 
 const getHtml = (htmlData: { seed: string; data: string }[]) => {
   const imgHtml = htmlData
-    .map(
-      ({ seed, data }) =>
-        `<div><h4>${seed}</h4><img alt="${seed}" src="${data}" /></div>`
-    )
+    .map(({ seed, data }) => {
+      return `<div><h4>${seed}</h4><img alt="${seed}" src="${data}" /></div>`;
+    })
     .join('');
 
   const html = `<!DOCTYPE html>
